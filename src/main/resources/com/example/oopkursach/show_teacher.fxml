@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopkursach.TeacherShowController">
+   <top>
+      <MenuBar prefHeight="26.0" prefWidth="344.0" BorderPane.alignment="CENTER">
+        <menus>
+            <Menu mnemonicParsing="false" text="Unspecified Menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Успеваемость" />
+                  <Menu mnemonicParsing="false" text="Unspecified Menu">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <AnchorPane prefHeight="374.0" prefWidth="700.0" style="-fx-background-color: 000000;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <Blend />
+               </effect>
+               <image>
+                  <Image url="@../../../image/image.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="groupLabel11" layoutX="14.0" layoutY="251.0" prefHeight="50.0" prefWidth="126.0" text="Должность:" textFill="#49a8d1">
+               <font>
+                  <Font name="Constantia" size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="nameLabel" layoutX="12.0" layoutY="201.0" prefHeight="50.0" prefWidth="661.0" textFill="#1a7ea9">
+               <font>
+                  <Font name="Constantia" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="postLabel" layoutX="154.0" layoutY="251.0" prefHeight="50.0" prefWidth="506.0" textFill="#1a7ea9">
+               <font>
+                  <Font name="Constantia" size="23.0" />
+               </font>
+            </Label>
+            <VBox layoutX="375.0" layoutY="27.0" prefHeight="120.0" prefWidth="250.0">
+               <children>
+                  <Hyperlink fx:id="linkSchedule" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Расписание">
+                     <font>
+                        <Font name="Constantia" size="20.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink fx:id="linkGroups" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Группы">
+                     <font>
+                        <Font name="Constantia" size="20.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink fx:id="linkLesson" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Дисциплины">
+                     <font>
+                        <Font name="Constantia" size="20.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+            </VBox>
+            <Label fx:id="groupLabel111" layoutX="14.0" layoutY="294.0" prefHeight="50.0" prefWidth="126.0" text="Аудитория:" textFill="#49a8d1">
+               <font>
+                  <Font name="Constantia" size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="auditoriumLabel" layoutX="154.0" layoutY="294.0" prefHeight="50.0" prefWidth="506.0" textFill="#1a7ea9">
+               <font>
+                  <Font name="Constantia" size="23.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
