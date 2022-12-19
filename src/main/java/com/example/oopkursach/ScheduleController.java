@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ScheduleController {
@@ -33,24 +34,23 @@ public class ScheduleController {
     @FXML
     private TextArea scheduleTextArea;
 
+    @FXML
+    private AnchorPane anchorPane;
+
     private final ScheduleParser scheduleParser = new ScheduleParser();
 
     @FXML
     void initialize() throws IOException {
         createScheduleTextArea();
         button.setOnAction(actionEvent -> {
-            button.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("show_student.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
         });
     }
 

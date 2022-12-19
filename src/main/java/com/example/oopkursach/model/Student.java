@@ -1,14 +1,23 @@
 package com.example.oopkursach.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Student {
+    @JsonProperty("login")
     private String login;
     private String password;
+    @JsonProperty("name")
     private String name;
+    @JsonProperty("ticket")
     private Integer ticket;
+    @JsonProperty("book")
     private Integer book;
+    @JsonProperty("group")
     private Integer group;
 
+    @JsonIgnore
     private Grade grade;
 
     public String getLogin() {

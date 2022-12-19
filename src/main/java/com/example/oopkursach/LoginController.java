@@ -5,18 +5,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.example.oopkursach.dao.Connection;
-import com.example.oopkursach.dao.StudentMapper;
+import com.example.oopkursach.dao.StudentParser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 public class LoginController {
-    private final StudentMapper mapper = new StudentMapper();
+    private final StudentParser mapper = new StudentParser();
     @FXML
     private ResourceBundle resources;
 
@@ -32,30 +30,28 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
+
+    @FXML
+    private AnchorPane anchorPane;
     private final Connection connection = new Connection();
 
     @FXML
     void initialize() {
         enterButton.setOnAction(actionEvent -> {
-            enterButton.getScene().getWindow().hide();
             if(connection.isTruePassword(loginField.getText(), passwordField.getText())){
                 login = loginField.getText();
                 writeTempFile();
                 FXMLLoader loader = new FXMLLoader();
-                System.out.println(getParam());
                 switch (getParam()) {
                     case "student" -> loader.setLocation(getClass().getResource("show_student.fxml"));
                     case "teacher" -> loader.setLocation(getClass().getResource("show_teacher.fxml"));
                 }
                 try {
-                    loader.load();
+                    AnchorPane pane = loader.load();
+                    anchorPane.getChildren().setAll(pane);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Parent root = loader.getRoot();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
             }
         });
     }

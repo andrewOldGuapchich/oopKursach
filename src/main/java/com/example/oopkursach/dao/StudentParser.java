@@ -2,6 +2,10 @@ package com.example.oopkursach.dao;
 
 import com.example.oopkursach.model.Grade;
 import com.example.oopkursach.model.Student;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,8 +17,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class StudentMapper {
+public class StudentParser {
     private final List<Student> studentList = new ArrayList<>();
+    ObjectMapper objectMapper = new ObjectMapper();
+    public void parser(){
+        try{
+            File file = new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//students.json");
+
+            Student student = objectMapper.readValue(file, Student.class);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void parse(){
         try{
@@ -35,12 +50,12 @@ public class StudentMapper {
                 student.setGroup(Integer.parseInt(String.valueOf(currentStudent.get("group"))));
 
                 Grade grade = new Grade();
-                HashMap<String, Integer> mapGrade = new HashMap<>();
+                HashMap<String, String> mapGrade = new HashMap<>();
                 JSONArray lessons = (JSONArray) currentStudent.get("lessons");
                 JSONArray gradeArray = (JSONArray) currentStudent.get("grade");
 
                 for(int i = 0; i < lessons.size(); i++){
-                    mapGrade.put(String.valueOf(lessons.get(i)), Integer.parseInt(String.valueOf(gradeArray.get(i))));
+                    mapGrade.put(String.valueOf(lessons.get(i)), String.valueOf(gradeArray.get(i)));
                 }
                 grade.setNumberTicket(Integer.parseInt(String.valueOf(currentStudent.get("ticket"))));
                 grade.setGradeMap(mapGrade);
@@ -53,7 +68,8 @@ public class StudentMapper {
         }
     }
 
-    public StudentMapper() {
+
+    public StudentParser() {
         parse();
     }
 

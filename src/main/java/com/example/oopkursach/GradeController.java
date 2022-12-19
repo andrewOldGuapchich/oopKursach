@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GradeController {
@@ -33,28 +34,27 @@ public class GradeController {
     private TextArea gradeTextArea;
 
     @FXML
+    private AnchorPane anchorPane;
+
+    @FXML
     void initialize() {
         createGradeTextArea();
         button.setOnAction(actionEvent -> {
-            button.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("show_student.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
         });
     }
 
     public void createGradeTextArea(){
         Grade grade = connection.getStudent(readTempFile()).getGrade();
         String allGrade = "";
-        for(Map.Entry<String, Integer> entry : grade.getGradeMap().entrySet()){
+        for(Map.Entry<String, String> entry : grade.getGradeMap().entrySet()){
             allGrade += entry.getKey() +
                     " " +
                     entry.getValue() + "\n";

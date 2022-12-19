@@ -16,6 +16,7 @@ module com.example.oopkursach {
     requires org.postgresql.jdbc;
     requires json.simple;
     requires jackson.mapper.asl;
+    requires com.fasterxml.jackson.databind;
     opens com.example.oopkursach to javafx.fxml;
     exports com.example.oopkursach;
 }

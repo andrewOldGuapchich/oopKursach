@@ -22,7 +22,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class AllLessonController {
+public class EmptyController {
 
     @FXML
     private ResourceBundle resources;
@@ -31,31 +31,30 @@ public class AllLessonController {
     private URL location;
 
     @FXML
-    private final List<Hyperlink> hyperlinks = new ArrayList<>();
-
-    @FXML
-    private Button button = new Button();
-
-    @FXML
     private AnchorPane anchorPane;
 
+    @FXML
+    private Button button;
+
+    @FXML
+    private final List<Hyperlink> hyperlinks = new ArrayList<>();
 
     @FXML
     void initialize() {
         Connection connection = new Connection();
         button.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("show_student.fxml"));
+            loader.setLocation(getClass().getResource("show_teacher.fxml"));
             try {
                 AnchorPane pane = loader.load();
                 anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
         });
+
         int step = 1;
-        for(Hyperlink h : createList(connection.getStudent(readTempFile()).getGroup())) {
+        for(Hyperlink h : createList(connection.getTeacher(readTempFile()).getName())) {
             h.setLayoutX(14);
             h.setLayoutY(2 + step * 25);
             h.setMaxWidth(500);
@@ -71,7 +70,7 @@ public class AllLessonController {
             hyperlink.setOnAction(actionEvent -> {
                 writeTempFile(hyperlink.getText());
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("lesson-page.fxml"));
+                loader.setLocation(getClass().getResource("table-group.fxml"));
                 try {
                     AnchorPane pane = loader.load();
                     anchorPane.getChildren().setAll(pane);
@@ -80,25 +79,27 @@ public class AllLessonController {
                 }
             });
         }
+
     }
 
+    private List<Hyperlink> createList(String key){
+        String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers.json";
+        HashMap<String, JSONArray> map = new HashMap<>();
 
-    private List<Hyperlink> createList(Integer group){
-        String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//lessons.json";
-        HashMap<Integer, JSONArray> map = new HashMap<>();
         try{
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
-            JSONArray discArray = (JSONArray) jsonObject.get("disciplines");
+            JSONArray groupsArray = (JSONArray) jsonObject.get("teachers");
 
-            for(Object o : discArray){
+            for(Object o : groupsArray){
                 JSONObject innerObj = (JSONObject) o;
-                map.put(Integer.parseInt(String.valueOf(innerObj.get("group"))), (JSONArray) innerObj.get("lesson"));
+                map.put(String.valueOf(innerObj.get("name")), (JSONArray) innerObj.get("groups"));
             }
 
-            for (Object o : map.get(group)) {
+
+            for (Object o : map.get(key)) {
                 Hyperlink tempLink = new Hyperlink();
                 tempLink.setText(String.valueOf(o));
                 hyperlinks.add(tempLink);
@@ -127,7 +128,7 @@ public class AllLessonController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_lesson.txt");
+                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt");
             writer = new FileWriter(file, false);
             writer.write(title);
         } catch (IOException ignored){
@@ -142,4 +143,5 @@ public class AllLessonController {
             }
         }
     }
+
 }

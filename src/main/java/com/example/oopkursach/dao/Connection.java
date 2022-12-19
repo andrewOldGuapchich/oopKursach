@@ -5,7 +5,7 @@ import com.example.oopkursach.model.Student;
 import com.example.oopkursach.model.Teacher;
 
 public class Connection {
-    private final StudentMapper mapper = new StudentMapper();
+    private final StudentParser mapper = new StudentParser();
     private final TeacherParser parser = new TeacherParser();
     private final Authorization authorization = new Authorization();
 

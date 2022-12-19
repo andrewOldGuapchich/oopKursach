@@ -1,26 +1,27 @@
 package com.example.oopkursach;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.oopkursach.dao.Connection;
-import com.example.oopkursach.dao.StudentMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 
 public class StudentShowController {
     private final Connection connection = new Connection();
@@ -48,57 +49,74 @@ public class StudentShowController {
     @FXML
     private Hyperlink linkSchedule;
 
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
-    void initialize(){
+    private ImageView imageView;
+
+
+    @FXML
+    void initialize() throws FileNotFoundException {
+        String path = "C:\\Users\\Andrew\\IdeaProjects\\oopKursach\\src\\main\\resources\\image\\" + readTempFile() + ".png";
+        FileInputStream fileInputStream = null;
+        try {
+            File file = new File(path);
+            if(!file.exists())
+                fileInputStream = new FileInputStream("C:\\Users\\Andrew\\IdeaProjects\\oopKursach\\src\\main\\resources\\image\\image.png");
+            else
+                fileInputStream = new FileInputStream(path);
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Image image  = new Image(fileInputStream);
+        imageView = new ImageView();
+        imageView.setImage(image);
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(200);
+        imageView.setX(12);
+        imageView.setY(12);
+
+
         linkGrade.setOnAction(actionEvent -> {
-            linkGrade.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("grade.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
         });
 
         linkSchedule.setOnAction(actionEvent -> {
-            linkSchedule.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("schedule-page.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
         });
 
         linkLesson.setOnAction(actionEvent -> {
-            linkLesson.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("lessons.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
         });
         String name = connection.getStudent(readTempFile()).getName();
         nameLabel.setText(name);
         groupLabel.setText(String.valueOf(connection.getStudent(readTempFile()).getGroup()));
         ticketLabel.setText(String.valueOf(connection.getStudent(readTempFile()).getTicket()));
+        anchorPane.getChildren().add(imageView);
     }
 
     private List<Hyperlink> createList(Integer group){

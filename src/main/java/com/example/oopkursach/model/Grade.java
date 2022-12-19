@@ -1,11 +1,13 @@
 package com.example.oopkursach.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.HashMap;
 import java.util.List;
 
 public class Grade {
     private Integer numberTicket;
-    private HashMap<String, Integer> gradeMap;
+    private HashMap<String, String> gradeMap;
 
     public Integer getNumberTicket() {
         return numberTicket;
@@ -15,11 +17,11 @@ public class Grade {
         this.numberTicket = numberTicket;
     }
 
-    public HashMap<String, Integer> getGradeMap() {
+    public HashMap<String, String> getGradeMap() {
         return gradeMap;
     }
 
-    public void setGradeMap(HashMap<String, Integer> gradeMap) {
+    public void setGradeMap(HashMap<String, String> gradeMap) {
         this.gradeMap = gradeMap;
     }
 }

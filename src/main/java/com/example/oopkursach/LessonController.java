@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LessonController {
@@ -45,6 +46,8 @@ public class LessonController {
 
     @FXML
     private Hyperlink scheduleLink;
+    @FXML
+    private AnchorPane anchorPane;
 
     @FXML
     private Hyperlink teacherLink;
@@ -54,7 +57,7 @@ public class LessonController {
     void initialize() {
         LessonParser parser = new LessonParser();
         Lesson lesson = parser.getLesson(readTempFile());
-
+        System.out.println(lesson);
         nameLabel.setText(lesson.getTitle());
         departmentLabel.setText(lesson.getDepartment());
         controlLabel.setText(lesson.getControl());
@@ -62,18 +65,15 @@ public class LessonController {
         hourLabel.setText(String.valueOf(lesson.getHour()));
 
         button.setOnAction(actionEvent -> {
-            button.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("show_student.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+
         });
 
         teacherLink.setText(lesson.getTeacher());

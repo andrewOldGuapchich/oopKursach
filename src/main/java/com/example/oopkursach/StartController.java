@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class StartController {
@@ -33,58 +34,44 @@ public class StartController {
     private Button teacherButton;
 
     @FXML
+    private AnchorPane mainAnchorPane;
+
+    @FXML
     void initialize() {
         studentButton.setOnAction(actionEvent -> {
             writeTempFile("student");
-            studentButton.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("login_page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login_page.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                mainAnchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
         });
-
-
 
         employeeButton.setOnAction(actionEvent ->{
             writeTempFile("employee");
             employeeButton.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("empl_login_page.fxml"));
+
             loader.setLocation(getClass().getResource("empl_login_page.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                mainAnchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
         });
 
         teacherButton.setOnAction(actionEvent -> {
             writeTempFile("teacher");
-            teacherButton.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("login_page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login_page.fxml"));
             try {
-                loader.load();
+                AnchorPane pane = loader.load();
+                mainAnchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.showAndWait();
         });
     }
 

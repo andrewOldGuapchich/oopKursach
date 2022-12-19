@@ -2,45 +2,12 @@
 
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopkursach.StudentShowController">
-   <top>
-      <MenuBar prefHeight="26.0" prefWidth="344.0" BorderPane.alignment="CENTER">
-        <menus>
-            <Menu mnemonicParsing="false" text="Unspecified Menu">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Успеваемость" />
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                  </Menu>
-               </items>
-            </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <center>
-      <AnchorPane prefHeight="374.0" prefWidth="700.0" style="-fx-background-color: 000000;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutX="12.0" pickOnBounds="true" preserveRatio="true">
-               <effect>
-                  <Blend />
-               </effect>
-               <image>
-                  <Image url="@../../../image/image.png" />
-               </image>
-            </ImageView>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopkursach.StudentShowController">
+      <children>
             <Label fx:id="groupLabel11" layoutX="14.0" layoutY="251.0" prefHeight="50.0" prefWidth="318.0" text="Номер студенческого билета:" textFill="#49a8d1">
                <font>
                   <Font name="Constantia" size="23.0" />
@@ -85,7 +52,10 @@
                   </Hyperlink>
                </children>
             </VBox>
+      <Hyperlink layoutX="615.0" layoutY="359.0" prefHeight="26.0" prefWidth="58.0" text="Выйти" textFill="#2196f3">
+         <font>
+            <Font name="Constantia" size="15.0" />
+         </font>
+      </Hyperlink>
          </children>
       </AnchorPane>
-   </center>
-</BorderPane>
