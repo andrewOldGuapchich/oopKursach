@@ -51,10 +51,7 @@ public class StartController {
 
         employeeButton.setOnAction(actionEvent ->{
             writeTempFile("employee");
-            employeeButton.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("empl_login_page.fxml"));
-
-            loader.setLocation(getClass().getResource("empl_login_page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login_page.fxml"));
             try {
                 AnchorPane pane = loader.load();
                 mainAnchorPane.getChildren().setAll(pane);
@@ -72,6 +69,10 @@ public class StartController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        });
+
+        exitButton.setOnAction(actionEvent -> {
+            System.exit(1);
         });
     }
 

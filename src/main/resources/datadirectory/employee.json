@@ -1,0 +1,24 @@
+{
+  "employees": [
+    {
+      "login" : "admin1",
+      "user" : "admin1",
+      "name" : "Деканат 1 института"
+    },
+    {
+      "login" : "admin2",
+      "user" : "admin2",
+      "name" : "Деканат 2 института"
+    },
+    {
+      "login" : "admin3",
+      "user" : "admin3",
+      "name" : "Деканат 3 института"
+    },
+    {
+      "login" : "admin4",
+      "user" : "admin4",
+      "name" : "Деканат 4 института"
+    }
+  ]
+}

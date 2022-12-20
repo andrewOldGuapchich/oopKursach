@@ -40,12 +40,27 @@ public class TeacherParser {
                     numbers.add(Integer.parseInt(String.valueOf(group)));
 
                 teacher.setListGroup(numbers);
+
+                JSONArray schedule = (JSONArray) innerObj.get("schedule");
+                List<String> scheduleList = new ArrayList<>();
+
+                for (Object group : schedule)
+                    scheduleList.add(String.valueOf(group));
+
+                teacher.setSchedule(scheduleList);
                 list.add(teacher);
             }
 
         } catch (IOException | ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<String> getSchedule(String login){
+        for(Teacher x : list)
+            if(x.getLogin().equals(login))
+                return x.getSchedule();
+        return null;
     }
 
     public TeacherParser(){

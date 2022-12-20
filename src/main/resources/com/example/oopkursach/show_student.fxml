@@ -52,7 +52,7 @@
                   </Hyperlink>
                </children>
             </VBox>
-      <Hyperlink layoutX="615.0" layoutY="359.0" prefHeight="26.0" prefWidth="58.0" text="Выйти" textFill="#2196f3">
+      <Hyperlink fx:id="exitLink" focusTraversable="false" layoutX="615.0" layoutY="350.0" prefHeight="26.0" prefWidth="58.0" text="Выйти" textFill="#2196f3">
          <font>
             <Font name="Constantia" size="15.0" />
          </font>

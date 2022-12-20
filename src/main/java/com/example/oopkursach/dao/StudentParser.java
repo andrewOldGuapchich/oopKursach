@@ -37,7 +37,6 @@ public class StudentParser {
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
-
             JSONArray students = (JSONArray) jsonObject.get("students");
 
             for(Object o : students){

@@ -4,21 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 
-import com.example.oopkursach.dao.Connection;
 import com.example.oopkursach.dao.ScheduleParser;
-import com.example.oopkursach.model.Grade;
+import com.example.oopkursach.dao.TeacherParser;
 import com.example.oopkursach.model.Schedule;
+import com.example.oopkursach.model.Teacher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class ScheduleController {
 
@@ -41,10 +37,18 @@ public class ScheduleController {
 
     @FXML
     void initialize() throws IOException {
-        createScheduleTextArea();
+        switch (getParam()){
+            case "teacher" -> createScheduleTextAreaTeachers();
+            case "student" -> createScheduleTextAreaStudents();
+        }
+
         button.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("show_student.fxml"));
+            switch (getParam()){
+                case "teacher" -> loader.setLocation(getClass().getResource("show_teacher.fxml"));
+                case "student" -> loader.setLocation(getClass().getResource("show_student.fxml"));
+            }
+
             try {
                 AnchorPane pane = loader.load();
                 anchorPane.getChildren().setAll(pane);
@@ -54,7 +58,7 @@ public class ScheduleController {
         });
     }
 
-    public void createScheduleTextArea() throws IOException {
+    private void createScheduleTextAreaStudents() throws IOException {
         Schedule schedule = scheduleParser.readSchedule();
         String allSchedule = "Понедельник\n" + schedule.getDays()[0]+
                 "\n\nВторник\n" + schedule.getDays()[1] +
@@ -64,11 +68,34 @@ public class ScheduleController {
         scheduleTextArea.setText(allSchedule);
     }
 
+    private void createScheduleTextAreaTeachers() {
+        TeacherParser parser = new TeacherParser();
+        String schedule = "";
+
+        for(String x : parser.getSchedule(readTempFile())){
+            schedule += x;
+            schedule += "\n";
+        }
+        scheduleTextArea.setText(schedule);
+    }
+
     private String readTempFile(){
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
                     new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+            line = reader.readLine();
+        } catch (IOException ignored){
+
+        }
+        return line;
+    }
+
+    private String getParam(){
+        String line = null;
+        try{
+            BufferedReader reader = new BufferedReader(
+                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

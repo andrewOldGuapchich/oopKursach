@@ -1,8 +1,6 @@
 package com.example.oopkursach;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -70,57 +68,61 @@ public class TableGroupController {
 
             for(int i = 0; i < nameList().size(); i++){
                 Student tempStudent = groupList(Integer.parseInt(readTempFile())).get(i);
+                studentList.removeIf(x -> x.getTicket() == tempStudent.getTicket().intValue());
                 Grade grade = tempStudent.getGrade();
-                for(Map.Entry<String, String> map : grade.getGradeMap().entrySet()){
-                    System.out.println(map.getKey() + " " + map.getValue());
-                }
                 grade.getGradeMap().remove(getNameLesson());
-                System.out.println(grade.getGradeMap().get(getNameLesson()));
-                System.out.println(markList().get(i).getText());
                 grade.getGradeMap().put(getNameLesson(), markList().get(i).getText());
                 tempStudent.setGrade(grade);
-                for(Map.Entry<String, String> map : grade.getGradeMap().entrySet()){
-                    System.out.println(map.getKey() + " " + map.getValue());
-                }
-                try{
-                    FileReader reader = new FileReader("src/main/resources/datadirectory/students.json");
-                    JSONParser parser = new JSONParser();
-                    JSONObject jsonObject = (JSONObject) parser.parse(reader);
-
-                    JSONArray students = (JSONArray) jsonObject.get("students");
-
-                    for(Object o : students){
-                        JSONObject currentStudent = (JSONObject) o;
-                        JSONArray lessons = (JSONArray) currentStudent.get("lessons");
-                        JSONArray gradeArray = (JSONArray) currentStudent.get("grade");
-                        //lessons.clear();
-                        //gradeArray.clear();
-
-                        currentStudent.clear();
-                        for(Map.Entry<String, String> map : grade.getGradeMap().entrySet()){
-                            lessons.add(map.getKey());
-                            gradeArray.add(map.getValue());
-                        }
-                        currentStudent.put("login", tempStudent.getLogin());
-                        currentStudent.put("name", tempStudent.getName());
-                        currentStudent.put("ticket", tempStudent.getTicket());
-                        currentStudent.put("book", tempStudent.getBook());
-                        currentStudent.put("group", tempStudent.getGroup());
-
-                        currentStudent.put("lessons", lessons);
-                        currentStudent.put("grade", gradeArray);
-                    }
-                    Files.write(Paths.get("src/main/resources/datadirectory/students.json"), jsonObject.toJSONString().getBytes());
-                } catch (ParseException | IOException e) {
-                    throw new RuntimeException(e);
-                }
-
+                studentList.add(tempStudent);
             }
+            writeOnStudentJson(studentList);
         });
 
         for(int i = 0; i < nameList().size(); i++){
             anchorPane.getChildren().add(nameList().get(i));
             anchorPane.getChildren().add(markList().get(i));
+        }
+    }
+
+    private void writeOnStudentJson(List<Student> list){
+        try {
+            File file = new File("src/main/resources/datadirectory/students.json");
+            FileReader reader = new FileReader(file);
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            jsonObject.clear();
+            JSONArray studentsArray = new JSONArray();
+            for(Student x : list){
+                JSONObject studentObject = new JSONObject();
+                JSONArray lessons = new JSONArray();
+                JSONArray grade = new JSONArray();
+
+                for(Map.Entry<String, String> entry : x.getGrade().getGradeMap().entrySet()){
+                    lessons.add(entry.getKey());
+                    grade.add(entry.getValue());
+                }
+                studentObject.put("login", x.getLogin());
+                studentObject.put("name", x.getName());
+                studentObject.put("ticket", x.getTicket());
+                studentObject.put("book", x.getBook());
+                studentObject.put("group", x.getGroup());
+                studentObject.put("lessons", lessons);
+                studentObject.put("grade", grade);
+
+                studentsArray.add(studentObject);
+            }
+
+            JSONObject object = new JSONObject();
+            object.put("students", (Object) studentsArray);
+
+            try (FileWriter writer = new FileWriter(file, false)){
+                writer.write(object.toJSONString());
+                writer.flush();
+            } catch (IOException ignored){
+
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -12,6 +12,16 @@ public class Teacher {
     private String auditorium;
     private List<Integer> listGroup;
 
+    private List<String> schedule;
+
+    public List<String> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(List<String> schedule) {
+        this.schedule = schedule;
+    }
+
     public String getLogin() {
         return login;
     }

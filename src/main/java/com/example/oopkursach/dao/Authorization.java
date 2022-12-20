@@ -22,8 +22,10 @@ public class Authorization {
                     "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//students_login_password.json";
             case "teacher" -> path =
                     "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers_login_password.json";
+            case "employee" -> path =
+                    "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//employee_login_password.json";
         }
-        System.out.println(getParam());
+
         try {
             assert path != null;
             FileReader reader = new FileReader(path);

@@ -34,7 +34,7 @@
                   <Font name="Constantia" size="23.0" />
                </font>
             </Label>
-            <VBox layoutX="375.0" layoutY="27.0" prefHeight="120.0" prefWidth="250.0">
+            <VBox layoutX="375.0" layoutY="35.0" prefHeight="80.0" prefWidth="250.0">
                <children>
                   <Hyperlink fx:id="linkSchedule" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Расписание">
                      <font>
@@ -42,11 +42,6 @@
                      </font>
                   </Hyperlink>
                   <Hyperlink fx:id="linkGroups" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Группы">
-                     <font>
-                        <Font name="Constantia" size="20.0" />
-                     </font>
-                  </Hyperlink>
-                  <Hyperlink fx:id="linkLesson" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Дисциплины">
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font>
@@ -63,5 +58,10 @@
                   <Font name="Constantia" size="23.0" />
                </font>
             </Label>
+      <Hyperlink fx:id="exitLink" focusTraversable="false" layoutX="615.0" layoutY="350.0" text="Выйти" textFill="#2196f3">
+         <font>
+            <Font name="Constantia" size="15.0" />
+         </font>
+      </Hyperlink>
          </children>
 </AnchorPane>

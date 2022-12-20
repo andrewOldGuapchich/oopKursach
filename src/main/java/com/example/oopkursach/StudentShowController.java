@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.example.oopkursach.dao.Connection;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +16,10 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -54,6 +57,12 @@ public class StudentShowController {
 
     @FXML
     private ImageView imageView;
+
+    @FXML
+    private Hyperlink exitLink;
+
+    private double xOffset;
+    private double yOffset;
 
 
     @FXML
@@ -112,6 +121,43 @@ public class StudentShowController {
                 throw new RuntimeException(e);
             }
         });
+
+        exitLink.setOnAction(actionEvent -> {
+            exitLink.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("start.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    stage.setX(event.getScreenX() + xOffset);
+                    stage.setY(event.getScreenY() + yOffset);
+                }
+            });
+
+            scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    xOffset = stage.getX() - mouseEvent.getScreenX();
+                    yOffset = stage.getY() - mouseEvent.getScreenY();
+                }
+            });
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.show();
+        });
+
+
         String name = connection.getStudent(readTempFile()).getName();
         nameLabel.setText(name);
         groupLabel.setText(String.valueOf(connection.getStudent(readTempFile()).getGroup()));

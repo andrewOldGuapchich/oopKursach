@@ -14,15 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class TeacherShowController {
-    private final Connection connection = new Connection();
+public class EmployeeShowController {
 
     @FXML
     private ResourceBundle resources;
@@ -31,7 +29,19 @@ public class TeacherShowController {
     private URL location;
 
     @FXML
+    private AnchorPane anchorPane;
+
+    @FXML
+    private Label auditoriumLabel;
+
+    @FXML
+    private Hyperlink exitLink;
+
+    @FXML
     private Label groupLabel11;
+
+    @FXML
+    private Label groupLabel111;
 
     @FXML
     private ImageView imageView;
@@ -49,22 +59,20 @@ public class TeacherShowController {
     private Label postLabel;
 
     @FXML
-    private Label auditoriumLabel;
+    private Hyperlink teachersLink;
 
-    @FXML
-    private AnchorPane anchorPane;
-
-    @FXML
-    private Hyperlink exitLink;
+    private final Connection connection = new Connection();
 
     private double xOffset;
     private double yOffset;
 
     @FXML
     void initialize() {
-        linkSchedule.setOnAction(actionEvent -> {
+        nameLabel.setText(connection.getEmployee(readTempFile()).getName());
+        linkGroups.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("schedule-page.fxml"));
+            loader.setLocation(getClass().getResource("groups-page.fxml"));
+
             try {
                 AnchorPane pane = loader.load();
                 anchorPane.getChildren().setAll(pane);
@@ -73,7 +81,7 @@ public class TeacherShowController {
             }
         });
 
-        linkGroups.setOnAction(actionEvent -> {
+        linkSchedule.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("groups-page.fxml"));
 
@@ -120,10 +128,6 @@ public class TeacherShowController {
             stage.show();
         });
 
-
-        nameLabel.setText(connection.getTeacher(readTempFile()).getName());
-        postLabel.setText(connection.getTeacher(readTempFile()).getPost());
-        auditoriumLabel.setText(connection.getTeacher(readTempFile()).getAuditorium());
     }
 
     private String readTempFile(){

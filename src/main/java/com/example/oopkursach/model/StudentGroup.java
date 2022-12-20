@@ -1,11 +1,10 @@
 package com.example.oopkursach.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Group {
+public class StudentGroup {
     private Integer number;
-    private List<Student> studentList;
+    private List<String> studentList;
 
     public Integer getNumber() {
         return number;
@@ -15,11 +14,11 @@ public class Group {
         this.number = number;
     }
 
-    public List<Student> getStudentList() {
+    public List<String> getStudentList() {
         return studentList;
     }
 
-    public void setStudentList(List<Student> studentList) {
+    public void setStudentList(List<String> studentList) {
         this.studentList = studentList;
     }
 }
