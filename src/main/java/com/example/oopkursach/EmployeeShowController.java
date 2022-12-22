@@ -89,6 +89,18 @@ public class EmployeeShowController {
             }
         });
 
+        addGroup.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("add_schedule.fxml"));
+
+            try {
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         linkGroups.setOnAction(actionEvent -> {
             writeTempFile("group");
             FXMLLoader loader = new FXMLLoader();
