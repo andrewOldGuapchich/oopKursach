@@ -1,8 +1,6 @@
 package com.example.oopkursach;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,6 +36,15 @@ public class EmployeeShowController {
     private Hyperlink exitLink;
 
     @FXML
+    private Hyperlink addGroup;
+
+    @FXML
+    private Hyperlink addStudent;
+
+    @FXML
+    private Hyperlink addTeacher;
+
+    @FXML
     private Label groupLabel11;
 
     @FXML
@@ -69,7 +76,21 @@ public class EmployeeShowController {
     @FXML
     void initialize() {
         nameLabel.setText(connection.getEmployee(readTempFile()).getName());
+
+        addStudent.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("add_page.fxml"));
+
+            try {
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         linkGroups.setOnAction(actionEvent -> {
+            writeTempFile("group");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("groups-page.fxml"));
 
@@ -82,6 +103,7 @@ public class EmployeeShowController {
         });
 
         linkSchedule.setOnAction(actionEvent -> {
+            writeTempFile("schedule");
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("groups-page.fxml"));
 
@@ -140,5 +162,25 @@ public class EmployeeShowController {
 
         }
         return line;
+    }
+
+    private void writeTempFile(String param){
+        FileWriter writer = null;
+        try{
+            File file =
+                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//schedule_or_list.txt");
+            writer = new FileWriter(file, false);
+            writer.write(param);
+        } catch (IOException ignored){
+
+        }
+        finally {
+            try {
+                assert writer != null;
+                writer.close();
+            } catch (IOException var15) {
+                System.err.println("File not found");
+            }
+        }
     }
 }

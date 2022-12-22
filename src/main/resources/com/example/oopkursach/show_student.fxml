@@ -8,53 +8,53 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopkursach.StudentShowController">
       <children>
-            <Label fx:id="groupLabel11" layoutX="14.0" layoutY="251.0" prefHeight="50.0" prefWidth="318.0" text="Номер студенческого билета:" textFill="#49a8d1">
+            <Label fx:id="groupLabel11" layoutX="14.0" layoutY="261.0" prefHeight="50.0" prefWidth="343.0" text="Номер студенческого билета:" textFill="#49a8d1">
                <font>
-                  <Font name="Constantia" size="23.0" />
+                  <Font name="Constantia Bold" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="nameLabel" layoutX="12.0" layoutY="201.0" prefHeight="50.0" prefWidth="661.0" textFill="#1a7ea9">
+            <Label fx:id="nameLabel" layoutX="14.0" layoutY="211.0" prefHeight="50.0" prefWidth="661.0" textFill="#49a8d1">
                <font>
                   <Font name="Constantia" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="groupLabel111" layoutX="14.0" layoutY="301.0" prefHeight="50.0" prefWidth="84.0" text="Группа:" textFill="#49a8d1">
+            <Label fx:id="groupLabel111" layoutX="14.0" layoutY="311.0" prefHeight="50.0" prefWidth="98.0" text="Группа:" textFill="#49a8d1">
+               <font>
+                  <Font name="Constantia Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label fx:id="ticketLabel" layoutX="357.0" layoutY="261.0" prefHeight="50.0" prefWidth="179.0" textFill="#49a8d1">
                <font>
                   <Font name="Constantia" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="ticketLabel" layoutX="332.0" layoutY="251.0" prefHeight="50.0" prefWidth="179.0" textFill="#1a7ea9">
-               <font>
-                  <Font name="Constantia" size="23.0" />
-               </font>
-            </Label>
-            <Label fx:id="groupLabel" layoutX="98.0" layoutY="301.0" prefHeight="50.0" prefWidth="179.0" textFill="#1a7ea9">
+            <Label fx:id="groupLabel" layoutX="112.0" layoutY="311.0" prefHeight="50.0" prefWidth="179.0" textFill="#49a8d1">
                <font>
                   <Font name="Constantia" size="23.0" />
                </font>
             </Label>
             <VBox layoutX="375.0" layoutY="27.0" prefHeight="120.0" prefWidth="250.0">
                <children>
-                  <Hyperlink fx:id="linkSchedule" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Расписание">
+                  <Hyperlink fx:id="linkSchedule" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Расписание" textFill="#49a8d1">
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font>
                   </Hyperlink>
-                  <Hyperlink fx:id="linkGrade" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Зачетка">
+                  <Hyperlink fx:id="linkGrade" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Зачетка" textFill="#49a8d1">
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font>
                   </Hyperlink>
-                  <Hyperlink fx:id="linkLesson" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Дисциплины">
+                  <Hyperlink fx:id="linkLesson" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Дисциплины" textFill="#49a8d1">
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font>
                   </Hyperlink>
                </children>
             </VBox>
-      <Hyperlink fx:id="exitLink" focusTraversable="false" layoutX="615.0" layoutY="350.0" prefHeight="26.0" prefWidth="58.0" text="Выйти" textFill="#2196f3">
+      <Hyperlink fx:id="exitLink" focusTraversable="false" layoutX="615.0" layoutY="350.0" prefHeight="26.0" prefWidth="58.0" text="Выйти" textFill="#49a8d1">
          <font>
-            <Font name="Constantia" size="15.0" />
+            <Font name="Constantia Bold" size="14.0" />
          </font>
       </Hyperlink>
          </children>

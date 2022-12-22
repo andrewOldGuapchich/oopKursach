@@ -12,26 +12,26 @@
    <children>
       <AnchorPane layoutY="120.0" prefHeight="280.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
          <children>
-            <Button fx:id="enterButton" layoutX="175.0" layoutY="153.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="349.0" style="-fx-background-color: #00ff00;" text="Войти  ">
+            <Button fx:id="enterButton" layoutX="175.0" layoutY="152.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="349.0" style="-fx-background-color: #49a8d1;" text="Войти  ">
                <font>
-                  <Font name="Chiller" size="21.0" />
+                  <Font name="Constantia Bold" size="20.0" />
                </font>
             </Button>
-            <Label layoutX="87.0" layoutY="49.0" prefHeight="39.0" prefWidth="98.0" text="Логин" textFill="#6130cf">
+            <Label layoutX="87.0" layoutY="49.0" prefHeight="39.0" prefWidth="98.0" text="Логин:" textFill="#2e3348">
                <font>
-                  <Font name="Franklin Gothic Demi" size="21.0" />
+                  <Font name="Constantia Bold" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="87.0" layoutY="100.0" prefHeight="39.0" prefWidth="98.0" text="Пароль" textFill="#6130cf">
+            <Label layoutX="87.0" layoutY="100.0" prefHeight="39.0" prefWidth="98.0" text="Пароль:" textFill="#2e3348">
                <font>
-                  <Font name="Franklin Gothic Demi" size="21.0" />
+                  <Font name="Constantia Bold" size="21.0" />
                </font>
             </Label>
             <PasswordField fx:id="passwordField" layoutX="253.0" layoutY="107.0" prefHeight="26.0" prefWidth="257.0" promptText="пароль" />
             <TextField fx:id="loginField" layoutX="253.0" layoutY="56.0" prefHeight="26.0" prefWidth="258.0" promptText="логин" />
-            <Hyperlink fx:id="backLink" layoutX="586.0" layoutY="232.0" prefHeight="24.0" prefWidth="84.0" text="Назад" textFill="#2196f3">
+            <Hyperlink fx:id="backLink" layoutX="586.0" layoutY="232.0" prefHeight="24.0" prefWidth="84.0" text="Назад" textFill="#2e3348">
                <font>
-                  <Font name="Constantia" size="15.0" />
+                  <Font name="Constantia Bold" size="16.0" />
                </font>
             </Hyperlink>
          </children>

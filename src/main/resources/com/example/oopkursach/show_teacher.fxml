@@ -19,48 +19,48 @@
                   <Image url="@../../../image/image.png" />
                </image>
             </ImageView>
-            <Label fx:id="groupLabel11" layoutX="14.0" layoutY="251.0" prefHeight="50.0" prefWidth="126.0" text="Должность:" textFill="#49a8d1">
+            <Label fx:id="groupLabel11" layoutX="14.0" layoutY="251.0" prefHeight="50.0" prefWidth="140.0" text="Должность:" textFill="#49a8d1">
                <font>
-                  <Font name="Constantia" size="23.0" />
+                  <Font name="Constantia Bold" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="nameLabel" layoutX="12.0" layoutY="201.0" prefHeight="50.0" prefWidth="661.0" textFill="#1a7ea9">
+            <Label fx:id="nameLabel" layoutX="12.0" layoutY="201.0" prefHeight="50.0" prefWidth="661.0" textFill="#49a8d1">
                <font>
                   <Font name="Constantia" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="postLabel" layoutX="154.0" layoutY="251.0" prefHeight="50.0" prefWidth="506.0" textFill="#1a7ea9">
+            <Label fx:id="postLabel" layoutX="154.0" layoutY="251.0" prefHeight="50.0" prefWidth="506.0" textFill="#49a8d1">
                <font>
                   <Font name="Constantia" size="23.0" />
                </font>
             </Label>
             <VBox layoutX="375.0" layoutY="35.0" prefHeight="80.0" prefWidth="250.0">
                <children>
-                  <Hyperlink fx:id="linkSchedule" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Расписание">
+                  <Hyperlink fx:id="linkSchedule" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Расписание" textFill="#49a8d1">
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font>
                   </Hyperlink>
-                  <Hyperlink fx:id="linkGroups" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Группы">
+                  <Hyperlink fx:id="linkGroups" focusTraversable="false" prefHeight="40.0" prefWidth="250.0" text="Группы" textFill="#49a8d1">
                      <font>
                         <Font name="Constantia" size="20.0" />
                      </font>
                   </Hyperlink>
                </children>
             </VBox>
-            <Label fx:id="groupLabel111" layoutX="14.0" layoutY="294.0" prefHeight="50.0" prefWidth="126.0" text="Аудитория:" textFill="#49a8d1">
+            <Label fx:id="groupLabel111" layoutX="14.0" layoutY="294.0" prefHeight="50.0" prefWidth="134.0" text="Аудитория:" textFill="#49a8d1">
+               <font>
+                  <Font name="Constantia Bold" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="auditoriumLabel" layoutX="154.0" layoutY="294.0" prefHeight="50.0" prefWidth="506.0" textFill="#49a8d1">
                <font>
                   <Font name="Constantia" size="23.0" />
                </font>
             </Label>
-            <Label fx:id="auditoriumLabel" layoutX="154.0" layoutY="294.0" prefHeight="50.0" prefWidth="506.0" textFill="#1a7ea9">
-               <font>
-                  <Font name="Constantia" size="23.0" />
-               </font>
-            </Label>
-      <Hyperlink fx:id="exitLink" focusTraversable="false" layoutX="615.0" layoutY="350.0" text="Выйти" textFill="#2196f3">
+      <Hyperlink fx:id="exitLink" focusTraversable="false" layoutX="615.0" layoutY="350.0" text="Выйти" textFill="#49a8d1">
          <font>
-            <Font name="Constantia" size="15.0" />
+            <Font name="Constantia Bold" size="16.0" />
          </font>
       </Hyperlink>
          </children>

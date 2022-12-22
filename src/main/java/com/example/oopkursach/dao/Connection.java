@@ -5,6 +5,10 @@ import com.example.oopkursach.model.Employee;
 import com.example.oopkursach.model.Student;
 import com.example.oopkursach.model.Teacher;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Connection {
     private final StudentParser studentParser = new StudentParser();
     private final TeacherParser teacherParser = new TeacherParser();

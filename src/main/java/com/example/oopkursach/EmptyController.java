@@ -2,10 +2,7 @@ package com.example.oopkursach;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import com.example.oopkursach.dao.Connection;
 import com.example.oopkursach.model.StudentGroup;
@@ -33,7 +30,11 @@ public class EmptyController {
     private AnchorPane anchorPane;
 
     @FXML
+    private AnchorPane anchorPane1;
+
+    @FXML
     private Button button;
+
 
     @FXML
     private List<Hyperlink> hyperlinks = new ArrayList<>();
@@ -49,8 +50,6 @@ public class EmptyController {
                 case "employee" ->
                         loader.setLocation(getClass().getResource("show_employee.fxml"));
             }
-
-
             try {
                 AnchorPane pane = loader.load();
                 anchorPane.getChildren().setAll(pane);
@@ -75,20 +74,23 @@ public class EmptyController {
             Font font = new Font("Constantia", 16);
             h.setFont(font);
             h.setFocusTraversable(false);
-            anchorPane.getChildren().add(h);
+            anchorPane1.getChildren().add(h);
             step++;
         }
 
         for(Hyperlink hyperlink : hyperlinks){
             hyperlink.setOnAction(actionEvent -> {
                 writeTempFile(hyperlink.getText());
-
                 FXMLLoader loader = new FXMLLoader();
                 switch (readInitFile()){
                     case "teacher" ->
                             loader.setLocation(getClass().getResource("table-group.fxml"));
-                    case "employee" ->
-                            loader.setLocation(getClass().getResource("list_group.fxml"));
+                    case "employee" -> {
+                        switch (readStatusFile()){
+                            case "group" -> loader.setLocation(getClass().getResource("list_group.fxml"));
+                            case "schedule" -> loader.setLocation(getClass().getResource("schedule-page.fxml"));
+                        }
+                    }
                 }
                 try {
                     AnchorPane pane = loader.load();
@@ -123,6 +125,7 @@ public class EmptyController {
 
                 StudentGroup group = new StudentGroup();
                 group.setNumber(Integer.parseInt(String.valueOf(innerObj.get("number"))));
+                Collections.sort(tempList);
                 group.setStudentList(tempList);
 
                 if(group.getNumber() / 1000 == numberInst)
@@ -210,6 +213,18 @@ public class EmptyController {
         try{
             BufferedReader reader = new BufferedReader(
                     new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
+            line = reader.readLine();
+        } catch (IOException ignored){
+
+        }
+        return line;
+    }
+
+    private String readStatusFile(){
+        String line = null;
+        try{
+            BufferedReader reader = new BufferedReader(
+                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//schedule_or_list.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

@@ -1,17 +1,14 @@
 package com.example.oopkursach;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import com.example.oopkursach.dao.StudentParser;
 import com.example.oopkursach.model.Student;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.print.Collation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -28,7 +25,7 @@ public class ListGroupController {
     private URL location;
 
     @FXML
-    private AnchorPane anchorPane;
+    private AnchorPane anchorPane1;
 
     @FXML
     private Button button;
@@ -37,7 +34,7 @@ public class ListGroupController {
     private Label group;
 
     @FXML
-    private AnchorPane mainAnchorPane;
+    private AnchorPane anchorPane;
 
     @FXML
     private Button saveButton;
@@ -45,18 +42,46 @@ public class ListGroupController {
     @FXML
     void initialize() {
         group.setText(readTempFile());
-        for(int i = 0; i < linksList().size(); i++)
-            anchorPane.getChildren().add(linksList().get(i));
+        List<Hyperlink> hyperlinks = linksList();
+        for (Hyperlink hyperlink : hyperlinks)
+            anchorPane1.getChildren().add(hyperlink);
+
+        for(Hyperlink hyper : hyperlinks){
+            hyper.setOnAction(actionEvent -> {
+                String[] temp = hyper.getText().split(", ");
+                writeTempFile(getLogin(temp[1]));
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("show_inform_student.fxml"));
+                try {
+                    AnchorPane pane = loader.load();
+                    anchorPane.getChildren().setAll(pane);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
         button.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("groups-page.fxml"));
             try {
                 AnchorPane pane = loader.load();
-                mainAnchorPane.getChildren().setAll(pane);
+                anchorPane.getChildren().setAll(pane);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+
+
+    private String getLogin(String ticket){
+        List<Student> studentList = groupList(Integer.parseInt(readTempFile()));
+        for(Student x : studentList){
+            if(x.getTicket() == Integer.parseInt(ticket))
+                return x.getLogin();
+        }
+        return null;
     }
 
     //список группы
@@ -86,7 +111,7 @@ public class ListGroupController {
             tempStudent.setLayoutY(35 + step * 25);
             tempStudent.setPrefWidth(600);
             tempStudent.setPrefHeight(25);
-            tempStudent.setText(x.getName());
+            tempStudent.setText(x.getName() + ", " + x.getTicket());
 
             list.add(tempStudent);
             step++;
@@ -105,5 +130,25 @@ public class ListGroupController {
 
         }
         return line;
+    }
+
+    private void writeTempFile(String title){
+        FileWriter writer = null;
+        try{
+            File file =
+                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_student.txt");
+            writer = new FileWriter(file, false);
+            writer.write(title);
+        } catch (IOException ignored){
+
+        }
+        finally {
+            try {
+                assert writer != null;
+                writer.close();
+            } catch (IOException var15) {
+                System.err.println("File not found");
+            }
+        }
     }
 }

@@ -6,29 +6,28 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oopkursach.StartController">
    <left>
       <AnchorPane fx:id="mainAnchorPane" prefHeight="400.0" prefWidth="702.0" style="-fx-background-color: #2e3348;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane layoutY="114.0" prefHeight="300.0" prefWidth="700.0" style="-fx-background-color: #fafafa;">
                <children>
-                  <Button fx:id="studentButton" layoutX="175.0" layoutY="41.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="349.0" style="-fx-background-color: #29449F;" text="Войти как студент " textFill="WHITE">
+                  <Button fx:id="studentButton" layoutX="175.0" layoutY="41.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="349.0" style="-fx-background-color: #49a8d1;" text="Войти как студент " textFill="#2e3348">
                      <font>
                         <Font name="Constantia Bold" size="21.0" />
                      </font>
                   </Button>
-                  <Button fx:id="employeeButton" layoutX="174.0" layoutY="170.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="350.0" style="-fx-background-color: #29449F;" text="Войти как сотрудник" textFill="WHITE">
+                  <Button fx:id="employeeButton" layoutX="174.0" layoutY="170.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="350.0" style="-fx-background-color: #49a8d1;" text="Войти как сотрудник" textFill="#2e3348">
                      <font>
                         <Font name="Constantia Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="teacherButton" layoutX="174.0" layoutY="106.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="350.0" style="-fx-background-color: #29449F;" text="Войти как преподаватель" textFill="WHITE">
+                  <Button fx:id="teacherButton" layoutX="174.0" layoutY="106.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="350.0" style="-fx-background-color: #49a8d1;" text="Войти как преподаватель" textFill="#2e3348">
                      <font>
                         <Font name="Constantia Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="exitButton" layoutX="290.0" layoutY="231.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #2e3348;" text="Выход" textFill="WHITE">
+                  <Button fx:id="exitButton" layoutX="290.0" layoutY="239.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #2e3348;" text="Выход" textFill="WHITE">
                      <font>
                         <Font name="Constantia Bold" size="12.0" />
                      </font>

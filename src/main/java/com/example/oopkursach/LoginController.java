@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.example.oopkursach.dao.Connection;
 import com.example.oopkursach.dao.StudentParser;
+import com.example.oopkursach.model.Student;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class LoginController {
-    private final StudentParser mapper = new StudentParser();
+    private final StudentParser parser = new StudentParser();
     @FXML
     private ResourceBundle resources;
 
@@ -57,14 +58,25 @@ public class LoginController {
         }
 
         enterButton.setOnAction(actionEvent -> {
+            if (!connection.isTruePassword(loginField.getText(), passwordField.getText())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка авторизации");
+                alert.setHeaderText(null);
+                alert.setContentText("Введён неверный логин или пароль!");
+                alert.showAndWait();
+            }
+
             if(connection.isTruePassword(loginField.getText(), passwordField.getText())){
                 login = loginField.getText();
                 writeTempFile();
                 FXMLLoader loader = new FXMLLoader();
                 switch (getParam()) {
-                    case "student" ->
+                    case "student" -> {
                         loader.setLocation(getClass().getResource("show_student.fxml"));
-
+                        for(Student x : parser.getStudentList())
+                            if(x.getLogin().equals(login))
+                                writeTempGroupFile(String.valueOf(x.getGroup()));
+                    }
                     case "teacher" ->
                         loader.setLocation(getClass().getResource("show_teacher.fxml"));
 
@@ -124,6 +136,26 @@ public class LoginController {
                     new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt");
             writer = new FileWriter(file, false);
             writer.write(login);
+        } catch (IOException ignored){
+
+        }
+        finally {
+            try {
+                assert writer != null;
+                writer.close();
+            } catch (IOException var15) {
+                System.err.println("File not found");
+            }
+        }
+    }
+
+    private void writeTempGroupFile(String line){
+        FileWriter writer = null;
+        try{
+            File file =
+                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt");
+            writer = new FileWriter(file, false);
+            writer.write(line);
         } catch (IOException ignored){
 
         }

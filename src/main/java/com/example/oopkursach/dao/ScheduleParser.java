@@ -48,7 +48,7 @@ public class ScheduleParser {
 
         Schedule schedule = new Schedule();
         for (Schedule s : list) {
-            if (s.getGroup().intValue() == student.getGroup().intValue()) {
+            if (s.getGroup() == Integer.parseInt(readTempGroupFile())) {
                 schedule = s;
             }
         }
@@ -60,6 +60,19 @@ public class ScheduleParser {
         try{
             BufferedReader reader = new BufferedReader(
                     new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+            line = reader.readLine();
+        } catch (IOException ignored){
+
+        }
+        return line;
+    }
+
+
+    private String readTempGroupFile(){
+        String line = null;
+        try{
+            BufferedReader reader = new BufferedReader(
+                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

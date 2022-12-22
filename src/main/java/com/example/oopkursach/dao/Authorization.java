@@ -15,6 +15,8 @@ public class Authorization {
 
     private final HashMap<String, String> authMap = new HashMap<>();
 
+
+
     public HashMap<String, String> getAuthMap() {
         String path = null;
         switch (getParam()) {

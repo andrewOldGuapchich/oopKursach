@@ -10,14 +10,15 @@ import java.util.ResourceBundle;
 import com.example.oopkursach.dao.Connection;
 
 import com.example.oopkursach.model.Grade;
+import com.example.oopkursach.model.Student;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.text.Font;
 
 public class GradeController {
     private final Connection connection = new Connection();
@@ -37,8 +38,15 @@ public class GradeController {
     private AnchorPane anchorPane;
 
     @FXML
+    private AnchorPane gradeAnchorPane;
+    @FXML
+    private Label nameLabel;
+
+    @FXML
     void initialize() {
-        createGradeTextArea();
+        createGradeScrollPane();
+        Student student = connection.getStudent(readTempFile());
+        nameLabel.setText(student.getName() + " " + student.getGroup());
         button.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("show_student.fxml"));
@@ -51,15 +59,50 @@ public class GradeController {
         });
     }
 
-    public void createGradeTextArea(){
+    public void createGradeScrollPane() {
         Grade grade = connection.getStudent(readTempFile()).getGrade();
-        String allGrade = "";
-        for(Map.Entry<String, String> entry : grade.getGradeMap().entrySet()){
-            allGrade += entry.getKey() +
-                    " " +
-                    entry.getValue() + "\n";
+        int step = 1;
+        for (Map.Entry<String, String> entry : grade.getGradeMap().entrySet()) {
+            TextField nameTextField = new TextField();
+            TextField markTextField = new TextField();
+
+            nameTextField.setLayoutY(step * 35);
+            nameTextField.setLayoutX(14);
+            nameTextField.setPrefWidth(486);
+            nameTextField.setPrefHeight(30);
+
+            markTextField.setLayoutY(step * 35);
+            markTextField.setLayoutX(500);
+            markTextField.setPrefWidth(160);
+            markTextField.setPrefHeight(30);
+
+
+            Font font = new Font("Constantia", 18);
+
+            nameTextField.setEditable(false);
+            nameTextField.setFont(font);
+            nameTextField.setStyle("-fx-text-fill: #49a8d1");
+
+            markTextField.setEditable(false);
+            markTextField.setFont(font);
+            markTextField.setStyle("-fx-text-fill: #49a8d1");
+
+            nameTextField.setText(entry.getKey());
+            markTextField.setText(entry.getValue());
+            step++;
+            gradeAnchorPane.getChildren().add(nameTextField);
+            gradeAnchorPane.getChildren().add(markTextField);
+
+            /*if(entry.getValue() == null){
+                allGrade += entry.getKey() + "\n";
+            }
+            else
+                allGrade += entry.getKey() +
+                        " " +
+                        entry.getValue() + "\n";
+        gradeTextArea.setStyle(("-fx-text-fill:  #49a8d1"));
+        gradeTextArea.setText(allGrade);*/
         }
-        gradeTextArea.setText(allGrade);
     }
 
     private String readTempFile(){
