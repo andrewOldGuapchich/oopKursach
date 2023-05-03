@@ -168,7 +168,7 @@ public class EmployeeShowController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 
@@ -180,7 +180,7 @@ public class EmployeeShowController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//schedule_or_list.txt");
+                    new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//schedule_or_list.txt");
             writer = new FileWriter(file, false);
             writer.write(param);
         } catch (IOException ignored){

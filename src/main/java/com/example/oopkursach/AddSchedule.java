@@ -1,18 +1,23 @@
 package com.example.oopkursach;
 
+import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
+import com.dlsc.formsfx.model.structure.Group;
+import com.example.oopkursach.dao.GroupParser;
 import com.example.oopkursach.model.Schedule;
+import com.example.oopkursach.model.Student;
+import com.example.oopkursach.model.StudentGroup;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class AddSchedule {
 
@@ -32,6 +37,9 @@ public class AddSchedule {
     private AnchorPane schedulePane;
 
     @FXML
+    private AnchorPane mainAnchorPane;
+
+    @FXML
     private Button saveButton;
 
     @FXML
@@ -46,13 +54,30 @@ public class AddSchedule {
     void initialize() {
         createScheduleTable();
         saveButton.setOnAction(actionEvent -> {
-            Schedule schedule = createSchedule();
-            System.out.println(labelNumber.getText());
-            for(int i = 0; i < 5; i++){
-                System.out.println(schedule.getDays()[i]);
+            addSchedule(createSchedule());
+            writeGroupFile(createSchedule());
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("show_employee.fxml"));
+
+            try {
+                AnchorPane pane = loader.load();
+                mainAnchorPane.getChildren().setAll(pane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
 
+        button.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("show_employee.fxml"));
+
+            try {
+                AnchorPane pane = loader.load();
+                mainAnchorPane.getChildren().setAll(pane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void createScheduleTable(){
@@ -100,5 +125,112 @@ public class AddSchedule {
         schedule.setDays(days);
 
         return schedule;
+    }
+
+    private void writeGroupFile(Schedule schedule) {
+        GroupParser groupParser = new GroupParser();
+        List<StudentGroup> list1 = groupParser.getGroupsList();
+        StudentGroup temp = new StudentGroup();
+        temp.setNumber(schedule.getGroup());
+        temp.setStudentList(new ArrayList<>());
+
+        list1.add(temp);
+
+        try {
+            File file = new File("src/main/resources/datadirectory/groups.json");
+            FileReader reader = new FileReader(file);
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            jsonObject.clear();
+            JSONArray userArray = new JSONArray();
+
+            for (StudentGroup x : list1) {
+                JSONObject groupObj = new JSONObject();
+                groupObj.put("number", x.getNumber());
+                JSONArray listSt = new JSONArray();
+                listSt.addAll(x.getStudentList());
+                groupObj.put("list_students", listSt);
+                userArray.add(groupObj);
+            }
+
+            JSONObject object = new JSONObject();
+            object.put("groups", (Object) userArray);
+
+            try (FileWriter writer = new FileWriter(file, false)) {
+                writer.write(object.toJSONString());
+                writer.flush();
+            } catch (IOException ignored) {
+
+            }
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+        private void addSchedule(Schedule schedule){
+        List<Schedule> schedules = new ArrayList<>();
+        try {
+            String path = "/src/main/resources/datadirectory/schedule.json";
+            FileReader reader = new FileReader(path);
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
+            JSONArray scheduleArray = (JSONArray) jsonObject.get("schedule");
+
+            for(Object o : scheduleArray) {
+                Schedule tempSchedule = new Schedule();
+                String[] temp = new String[5];
+                temp[0] = String.valueOf(((JSONObject) o).get("monday"));
+                temp[1] = String.valueOf(((JSONObject) o).get("tuesday"));
+                temp[2] = String.valueOf(((JSONObject) o).get("wednesday"));
+                temp[3] = String.valueOf(((JSONObject) o).get("thursday"));
+                temp[4] = String.valueOf(((JSONObject) o).get("friday"));
+
+                tempSchedule.setGroup(Integer.parseInt(String.valueOf(((JSONObject) o).get("group"))));
+                tempSchedule.setDays(temp);
+
+                schedules.add(tempSchedule);
+            }
+
+            for(Schedule x : schedules){
+                if(x.getGroup().intValue() == schedule.getGroup().intValue()){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Ошибка ввода");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Расписание для это группы уже существует!");
+                    alert.showAndWait();
+                    return;
+                }
+            }
+
+            schedules.add(schedule);
+
+            File file = new File("src/main/resources/datadirectory/schedule.json");
+            jsonObject.clear();
+            JSONArray scheduleArr = new JSONArray();
+            for(Schedule x : schedules){
+                JSONObject scheduleObj = new JSONObject();
+                scheduleObj.put("group", x.getGroup());
+                scheduleObj.put("monday", x.getDays()[0]);
+                scheduleObj.put("tuesday", x.getDays()[1]);
+                scheduleObj.put("wednesday", x.getDays()[2]);
+                scheduleObj.put("thursday", x.getDays()[3]);
+                scheduleObj.put("friday", x.getDays()[4]);
+
+                scheduleArr.add(scheduleObj);
+            }
+
+            JSONObject object = new JSONObject();
+            object.put("schedule", (Object) scheduleArr);
+
+            try (FileWriter writer = new FileWriter(file, false)){
+                writer.write(object.toJSONString());
+                writer.flush();
+            } catch (IOException ignored){
+
+            }
+
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

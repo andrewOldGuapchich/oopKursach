@@ -21,7 +21,7 @@ public class EmployeeParser {
 
     public void parse(){
         try{
-            String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//employee.json";
+            String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//employee.json";
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);

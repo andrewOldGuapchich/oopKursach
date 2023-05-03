@@ -18,7 +18,7 @@ public class GroupParser {
     private final List<StudentGroup> groupsList = new ArrayList<>();
     public void parse(){
         try{
-            String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//groups.json";
+            String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//groups.json";
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -50,12 +50,12 @@ public class GroupParser {
 
     public Lesson getLesson(String name){
         List<Lesson> list = new ArrayList<>();
-        String path = "src/main/resources/datadirectory/students.json";
+        String path = "src/main/resources/datadirectory/groups.json";
         try{
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
-            JSONArray lessons = (JSONArray) jsonObject.get("number");
+            JSONArray lessons = (JSONArray) jsonObject.get("groups");
 
             for(Object o : lessons){
                 JSONObject inner = (JSONObject) o;

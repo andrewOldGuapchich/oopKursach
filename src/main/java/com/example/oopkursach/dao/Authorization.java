@@ -21,11 +21,11 @@ public class Authorization {
         String path = null;
         switch (getParam()) {
             case "student" -> path =
-                    "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//students_login_password.json";
+                    "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//students_login_password.json";
             case "teacher" -> path =
-                    "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers_login_password.json";
+                    "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers_login_password.json";
             case "employee" -> path =
-                    "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//employee_login_password.json";
+                    "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//employee_login_password.json";
         }
 
         try {
@@ -49,7 +49,7 @@ public class Authorization {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

@@ -50,7 +50,7 @@ public class LessonController {
     private AnchorPane anchorPane;
 
     @FXML
-    private Hyperlink teacherLink;
+    private Label teacherNameLabel;
 
 
     @FXML
@@ -66,7 +66,7 @@ public class LessonController {
 
         button.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("show_student.fxml"));
+            loader.setLocation(getClass().getResource("lessons.fxml"));
             try {
                 AnchorPane pane = loader.load();
                 anchorPane.getChildren().setAll(pane);
@@ -76,14 +76,26 @@ public class LessonController {
 
         });
 
-        teacherLink.setText(lesson.getTeacher());
+        scheduleLink.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("empty_page.fxml"));
+            try {
+                AnchorPane pane = loader.load();
+                anchorPane.getChildren().setAll(pane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+
+        teacherNameLabel.setText(lesson.getTeacher());
     }
 
     private String readTempFile(){
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_lesson.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_lesson.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

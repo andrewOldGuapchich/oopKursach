@@ -88,7 +88,7 @@ public class AddController {
     private void writeLoginAndPassword(){
         HashMap<String, String> mapPassword = new HashMap<>();
         try {
-            FileReader reader = new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//students_login_password.json");
+            FileReader reader = new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//students_login_password.json");
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
@@ -178,7 +178,7 @@ public class AddController {
     }
 
     private Student createStudent(){
-        Student student = new Student();
+        Student student = Student.getInstance();
         student.setName(nameField.getText());
         student.setLogin(loginField.getText());
         student.setPassword(passwordField.getText());
@@ -205,7 +205,7 @@ public class AddController {
 
         List<String> lessonList = new ArrayList<>();
         try {
-            String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//lesson_for_instit.json";
+            String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//lesson_for_instit.json";
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -228,7 +228,6 @@ public class AddController {
             }
 
             HashMap<Integer, JSONArray> temp = map.get(group / 1000);
-            System.out.println(temp.size());
             JSONArray tempArr = temp.get(course);
             for (Object o : tempArr)
                 lessonList.add(String.valueOf(o));
@@ -240,7 +239,7 @@ public class AddController {
 
         HashMap<String, String> gradeMap = new HashMap<>();
         for (String s : lessonList) {
-            gradeMap.put(s, " ");
+            gradeMap.put(s, "");
         }
 
         grade.setGradeMap(gradeMap);

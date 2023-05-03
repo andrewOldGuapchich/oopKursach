@@ -105,7 +105,7 @@ public class EmptyController {
 
     private List<Hyperlink> getHyperlinks(String key){
         List<StudentGroup> groups = new ArrayList<>();
-        String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//groups.json";
+        String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//groups.json";
         int numberInst = Integer.parseInt(key.replace("admin", ""));
         List<Hyperlink> hyperlinks = new ArrayList<>();
 
@@ -146,7 +146,7 @@ public class EmptyController {
     }
 
     private List<Hyperlink> createList(String key){
-        String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers.json";
+        String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers.json";
         HashMap<String, JSONArray> map = new HashMap<>();
         List<Hyperlink> hyperlinks = new ArrayList<>();
 
@@ -180,7 +180,7 @@ public class EmptyController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 
@@ -192,7 +192,7 @@ public class EmptyController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt");
+                    new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt");
             writer = new FileWriter(file, false);
             writer.write(title);
         } catch (IOException ignored){
@@ -212,7 +212,7 @@ public class EmptyController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 
@@ -224,7 +224,7 @@ public class EmptyController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//schedule_or_list.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//schedule_or_list.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

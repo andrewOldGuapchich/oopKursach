@@ -69,14 +69,14 @@
                   <Font name="Constantia" size="16.0" />
                </font>
             </Label>
-            <Hyperlink fx:id="teacherLink" focusTraversable="false" layoutX="154.0" layoutY="251.0" prefHeight="27.0" prefWidth="429.0" textFill="#2196f3">
-               <font>
-                  <Font name="Constantia" size="16.0" />
-               </font>
-            </Hyperlink>
       <Label fx:id="nameLabel" layoutX="18.0" layoutY="9.0" prefHeight="47.0" prefWidth="682.0" textFill="#247ec4">
          <font>
             <Font name="Constantia Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="teacherNameLabel" layoutX="163.0" layoutY="247.0" prefHeight="35.0" prefWidth="356.0" textFill="#2196f3">
+         <font>
+            <Font name="Constantia" size="16.0" />
          </font>
       </Label>
          </children>

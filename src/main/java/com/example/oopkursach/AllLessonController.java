@@ -84,7 +84,7 @@ public class AllLessonController {
 
 
     private List<Hyperlink> createList(Integer group){
-        String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//lessons.json";
+        String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//lessons.json";
         HashMap<Integer, JSONArray> map = new HashMap<>();
         try{
             FileReader reader = new FileReader(path);
@@ -115,7 +115,7 @@ public class AllLessonController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 
@@ -127,7 +127,7 @@ public class AllLessonController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_lesson.txt");
+                    new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_lesson.txt");
             writer = new FileWriter(file, false);
             writer.write(title);
         } catch (IOException ignored){

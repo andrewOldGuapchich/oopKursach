@@ -22,7 +22,7 @@ public class Connection {
     }
 
     public Student getStudent(String login){
-        Student student = new Student();
+        Student student = Student.getInstance();
         for(Student x : studentParser.getStudentList()){
             if(login.equals(x.getLogin())) {
                 student = x;

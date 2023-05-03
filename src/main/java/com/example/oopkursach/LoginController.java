@@ -133,7 +133,7 @@ public class LoginController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt");
+                    new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt");
             writer = new FileWriter(file, false);
             writer.write(login);
         } catch (IOException ignored){
@@ -153,7 +153,7 @@ public class LoginController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt");
+                    new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt");
             writer = new FileWriter(file, false);
             writer.write(line);
         } catch (IOException ignored){
@@ -173,7 +173,7 @@ public class LoginController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

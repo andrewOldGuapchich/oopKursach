@@ -68,15 +68,46 @@ public class TableGroupController {
 
             for(int i = 0; i < nameList().size(); i++){
                 Student tempStudent = groupList(Integer.parseInt(readTempFile())).get(i);
-                studentList.removeIf(x -> x.getTicket() == tempStudent.getTicket().intValue());
-                Grade grade = tempStudent.getGrade();
-                grade.getGradeMap().remove(getNameLesson());
-                grade.getGradeMap().put(getNameLesson(), markList().get(i).getText());
-                tempStudent.setGrade(grade);
-                studentList.add(tempStudent);
+
+
+                if(!isInteger(markList().get(i).getText())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Ошибка ввода");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Введено неверный значение!");
+                    alert.showAndWait();
+                    break;
+                }
+                else if(!isGoodValue(Integer.parseInt(markList().get(i).getText()))){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Ошибка ввода");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Введено неверный значение!");
+                    alert.showAndWait();
+                    break;
+                }
+                else {
+                    studentList.removeIf(x -> x.getTicket() == tempStudent.getTicket().intValue());
+                    Grade grade = tempStudent.getGrade();
+                    grade.getGradeMap().remove(getNameLesson());
+                    grade.getGradeMap().put(getNameLesson(), markList().get(i).getText());
+                    tempStudent.setGrade(grade);
+                    studentList.add(tempStudent);
+                }
             }
             writeOnStudentJson(studentList);
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("table-group.fxml"));
+            try {
+                AnchorPane pane = loader.load();
+                mainAnchorPane.getChildren().setAll(pane);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
+
+
 
         for(int i = 0; i < nameList().size(); i++){
             anchorPane.getChildren().add(nameList().get(i));
@@ -92,12 +123,12 @@ public class TableGroupController {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
             jsonObject.clear();
             JSONArray studentsArray = new JSONArray();
-            for(Student x : list){
+            for (Student x : list) {
                 JSONObject studentObject = new JSONObject();
                 JSONArray lessons = new JSONArray();
                 JSONArray grade = new JSONArray();
 
-                for(Map.Entry<String, String> entry : x.getGrade().getGradeMap().entrySet()){
+                for (Map.Entry<String, String> entry : x.getGrade().getGradeMap().entrySet()) {
                     lessons.add(entry.getKey());
                     grade.add(entry.getValue());
                 }
@@ -143,7 +174,7 @@ public class TableGroupController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 
@@ -156,7 +187,7 @@ public class TableGroupController {
         String temp = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
             temp = reader.readLine();
         } catch (IOException ignored){
 
@@ -203,10 +234,26 @@ public class TableGroupController {
             mark.setPrefWidth(125);
             mark.setMaxHeight(35);
 
-            mark.setText(String.valueOf(x.getGrade().getGradeMap().get(getNameLesson())));
+            if(String.valueOf(x.getGrade().getGradeMap().get(getNameLesson())) == null)
+                mark.setText("");
+            else
+                mark.setText(String.valueOf(x.getGrade().getGradeMap().get(getNameLesson())));
             markList.add(mark);
             step++;
         }
         return markList;
+    }
+
+    public boolean isInteger(String value){
+        try{
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException ignored) {
+        }
+        return false;
+    }
+
+    private boolean isGoodValue(int a){
+        return a >= 2 && a <= 5;
     }
 }

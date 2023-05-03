@@ -19,6 +19,7 @@ import java.util.Objects;
 public class ScheduleParser {
     private final Connection connection = new Connection();
 
+
     public Schedule readSchedule() throws IOException {
         Student student = connection.getStudent(readTempFile());
         List<Schedule> list = new ArrayList<>();
@@ -59,7 +60,7 @@ public class ScheduleParser {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 
@@ -72,7 +73,7 @@ public class ScheduleParser {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 

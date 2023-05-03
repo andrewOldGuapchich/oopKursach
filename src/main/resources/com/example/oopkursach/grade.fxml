@@ -15,7 +15,7 @@
             </Button>
       <ScrollPane layoutY="51.0" prefHeight="298.0" prefWidth="700.0">
         <content>
-          <AnchorPane fx:id="gradeAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="282.0" prefWidth="699.0">
+          <AnchorPane fx:id="gradeAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="704.0">
                <children>
                   <Label layoutX="14.0" prefHeight="30.0" prefWidth="450.0" text="Предмет" textFill="#49a8d1">
                      <font>

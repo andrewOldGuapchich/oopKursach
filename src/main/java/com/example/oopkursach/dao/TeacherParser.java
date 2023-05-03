@@ -16,7 +16,7 @@ public class TeacherParser {
 
     public void parse(){
         try{
-            String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers.json";
+            String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//teachers.json";
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);

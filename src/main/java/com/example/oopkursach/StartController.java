@@ -80,7 +80,7 @@ public class StartController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt");
+                    new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//init_author.txt");
             writer = new FileWriter(file, false);
             writer.write(param);
         } catch (IOException ignored){

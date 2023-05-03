@@ -67,12 +67,12 @@ public class StudentShowController {
 
     @FXML
     void initialize() throws FileNotFoundException {
-        String path = "C:\\Users\\Andrew\\IdeaProjects\\oopKursach\\src\\main\\resources\\image\\" + readTempFile() + ".png";
+        String path = "C:\\IdeaProjects\\oopKursach\\src\\main\\resources\\image\\" + readTempFile() + ".png";
         FileInputStream fileInputStream = null;
         try {
             File file = new File(path);
             if(!file.exists())
-                fileInputStream = new FileInputStream("C:\\Users\\Andrew\\IdeaProjects\\oopKursach\\src\\main\\resources\\image\\image.png");
+                fileInputStream = new FileInputStream("C:\\IdeaProjects\\oopKursach\\src\\main\\resources\\image\\image.png");
             else
                 fileInputStream = new FileInputStream(path);
 
@@ -166,7 +166,7 @@ public class StudentShowController {
     }
 
     private List<Hyperlink> createList(Integer group){
-        String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//lessons.json";
+        String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//lessons.json";
         List<Hyperlink> hyperlinks = new ArrayList<>();
         try{
             FileReader reader = new FileReader(path);
@@ -201,7 +201,7 @@ public class StudentShowController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_author.txt"));
              line = reader.readLine();
         } catch (IOException ignored){
 

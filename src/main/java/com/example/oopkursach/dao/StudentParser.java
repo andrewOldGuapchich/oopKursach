@@ -22,7 +22,7 @@ public class StudentParser {
     ObjectMapper objectMapper = new ObjectMapper();
     public void parser(){
         try{
-            File file = new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//students.json");
+            File file = new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//students.json");
 
             Student student = objectMapper.readValue(file, Student.class);
 
@@ -33,7 +33,7 @@ public class StudentParser {
 
     public void parse(){
         try{
-            String path = "C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//students.json";
+            String path = "C://IdeaProjects//oopKursach//src//main//resources//datadirectory//students.json";
             FileReader reader = new FileReader(path);
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);

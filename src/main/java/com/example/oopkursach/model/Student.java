@@ -20,6 +20,20 @@ public class Student {
     @JsonIgnore
     private Grade grade;
 
+    private static volatile Student instance;
+    public static Student getInstance() {
+        Student localInstance = instance;
+        if (localInstance == null) {
+            synchronized (Singleton.class) {
+                localInstance = instance;
+                if (localInstance == null) {
+                    instance = localInstance = new Student();
+                }
+            }
+        }
+        return localInstance;
+    }
+
     public String getLogin() {
         return login;
     }

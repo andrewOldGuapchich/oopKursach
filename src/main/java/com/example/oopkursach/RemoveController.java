@@ -106,7 +106,7 @@ public class RemoveController {
         String line = null;
         try {
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_student.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_student.txt"));
             line = reader.readLine();
         } catch (IOException ignored) {
 
@@ -118,7 +118,7 @@ public class RemoveController {
         String line = null;
         try {
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
             line = reader.readLine();
         } catch (IOException ignored) {
 
@@ -140,7 +140,7 @@ public class RemoveController {
 
     private Student createStudent() {
         List<Student> studentList = groupList(Integer.parseInt(readTempGroupFile()));
-        Student student = new Student();
+        Student student = Student.getInstance();
         String login = readTempFile();
         for (Student x : studentList) {
             if(x.getLogin().equals(login)){
@@ -163,7 +163,7 @@ public class RemoveController {
     private void removeLoinAndPassword(){
         HashMap<String, String> mapPassword = new HashMap<>();
         try {
-            FileReader reader = new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//students_login_password.json");
+            FileReader reader = new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//students_login_password.json");
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 

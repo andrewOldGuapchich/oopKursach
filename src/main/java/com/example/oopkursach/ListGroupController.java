@@ -124,7 +124,7 @@ public class ListGroupController {
         String line = null;
         try{
             BufferedReader reader = new BufferedReader(
-                    new FileReader("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
+                    new FileReader("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_group.txt"));
             line = reader.readLine();
         } catch (IOException ignored){
 
@@ -136,7 +136,7 @@ public class ListGroupController {
         FileWriter writer = null;
         try{
             File file =
-                    new File("C://Users//Andrew//IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_student.txt");
+                    new File("C://IdeaProjects//oopKursach//src//main//resources//datadirectory//temp_file_student.txt");
             writer = new FileWriter(file, false);
             writer.write(title);
         } catch (IOException ignored){
